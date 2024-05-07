@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Brandeis University</title>
+      <!-- <link rel="stylesheet" type="text/css" href="/css/main.css"> -->
+       <link rel="icon" href="data:,">
+
+
+
+  <!-- CSS includes -->
+  <link href="./login_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./login_files/brandeis.min.css" rel="stylesheet">
+  <link href="./login_files/sticky-footer.css" rel="stylesheet">
+  <link href="./login_files/font-awesome.min.css" rel="stylesheet">
+
+
+  <!-- JavaScript includes -->
+  <script src="./login_files/jquery-1.11.3.min.js"></script>
+  <script src="./login_files/statuspageio.min.js"></script>
+  <script src="./login_files/brandeis-status.min.js"></script>
+  <script src="./login_files/bootstrap.min.js"></script>
+
+      </head>
+    <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="https://shibboleth.brandeis.edu/"><img src="./login_files/login-header.png" alt="Brandeis Login Logo" style="max-width: 200px; margin-top: -4px;"></a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://login.brandeis.edu/">Brandeis Apps</a></li>
+          <li><a href="https://help.brandeis.edu/">Help</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="container">
+    <div class="row" style="margin-top: 55px; margin-bottom: -45px;">
+      <div class="col-xs-12 hidden-sm hidden-md hidden-lg" style="text-align: center;">
+        <span id="overall-mobile"><i class="fa fa-check-circle-o fa-lg fa-fw" style="color: green; margin-top: 3px; margin-right: 5px;" alt="operational"></i><a href="http://status.brandeis.edu/" target="_blank">All services operational</a></span>
+      </div>
+    </div>
+    <div class="row" style="padding-top: 45px; padding-bottom: 30px;"> <!-- logo row -->
+      <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8"> <!-- logo column -->
+          <h1 class="sr-only">Brandeis University Login Page</h1>
+          <img src="./login_files/brandeis.png" alt="Brandeis" class="img-responsive center-block" style="max-width: 300px; margin-top: 30px;">
+      </div> <!-- logo column -->
+    </div> <!-- logo row -->
+    <div class="row"> <!-- form row -->
+      <div class="col-lg-offset-4 col-lg-4 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8"> <!-- form column -->
+
+
+         <form name="f" action="/login" method="post">
+
+              <div class="form-element-wrapper">
+                <label style="font-size: 17px; font-weight: normal;" for="username">username</label>
+                <input autofocus="autofocus" class="form-element form-field form-control input-lg" id="username" name="j_username" type="text" autocapitalize="none">
+              </div>
+
+              <div class="form-element-wrapper">
+                <label style="font-size: 17px; font-weight: normal;" for="password">passphrase</label>
+                <input class="form-element form-field form-control input-lg" id="password" name="j_password" type="password" value="">
+
+               </div>
+
+<div class="row hidden-xs">
+          <div class="form-group" style="padding-left: 15px;">
+            <a alt="create account" href="https://identity.brandeis.edu/identity/index" tabindex="4">create account</a> /
+            <a alt="forgot passphrase" href="https://identity.brandeis.edu/identity/reset_password" tabindex="5">forgot passphrase</a>
+          </div>
+        </div>
+<div class="row hidden-sm hidden-md hidden-lg" style="padding-left: 15px;">
+          <div class="form-group">
+            <a alt="forgot passphrase" href="https://identity.brandeis.edu/identity/reset_password">forgot passphrase</a>
+          </div>
+        </div>
+
+
+
+
+
+               <div class="form-group hidden-sm hidden-md hidden-lg">
+                          <button class="form-element form-button btn btn-info btn-block" type="submit" name="_eventId_proceed" onclick="this.childNodes[0].nodeValue='Logging in, please wait...'">log in</button>
+        </div>
+
+               <div class="form-element-wrapper form-group form-group pull-right hidden-xs">
+                <button class="form-element form-button btn btn-info btn-block" type="submit" name="_eventId_proceed" onclick="this.childNodes[0].nodeValue='Logging in, please wait...'">log in</button>
+              </div>
+
+            </form>
+
+      </div> <!-- form column -->
+</div> <!-- form row -->
+
+
+<div class="row">
+      <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+
+
+      </div>
+      </div>
+
+    <!-- BEGIN INFO BOX -->
+    <!-- <div class="row">
+      <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8">
+        <div class="sr-only">information box</div>
+        <div class="aui-message aui-message-info">
+        <p></p>
+        </div>
+      </div>
+    </div> -->
+    <!-- END INFO BOX -->
+
+    <!-- brandeistatus -->
+        <div id="coolstatus"></div>
+      <script>
+            $.getJSON("https://www.brandeis.edu/its/feeds/login-messages.json", function(data) {
+      $.each(data, function (key) {
+        if (data[key].title && data[key].body) {
+          $("#coolstatus").append("<div class='incident-item incident-" + data[key].type + "'><h4 class='incident-title'>" + data[key].title + "</h4><!--span class='incident-updated'> Last updated: " + data[key].updated + "</span--><p class='incident-body'>" + data[key].body + "</p></div>");
+          }
+    })})
+  </script>
+  <!-- yeah -->
+
+    <!-- BEGIN INCIDENT BOX -->
+    <div class="row">
+      <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+        <div id="incident" class=""></div>
+      </div>
+    </div>
+    <!-- END INCIDENT BOX -->
+  </div>
+
+<footer class="footer">
+    <div class="container-fluid">
+      <div class="row" style="padding-top: 20px;">
+        <div class="col-xs-12">
+          <span id="overall" class="pull-right hidden-xs" style="margin-right: 20px;"><i class="fa fa-check-circle-o fa-lg fa-fw" style="color: green; margin-top: 3px; margin-right: 5px;" alt="operational"></i><a href="http://status.brandeis.edu/" target="_blank">All services operational</a></span>
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">&gt;
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title">Status Dashboard</h4>
+                </div>
+                <div class="modal-body">
+                  <h4 style="font-weight: 200; margin-bottom: 20px; line-height: 25px;">The services below are currently experiencing issues. Head over to <a href="http://status.brandeis.edu/" target="_blank">status.brandeis.edu</a> for more details or to subscribe to updates.</h4>
+                  <span id="outages"></span>
+                </div><!-- /.modal-body -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+          <span id="popover" tabindex="0" class="hidden-xs pull-right" data-toggle="popover" data-trigger="focus" data-placement="top" title="" data-content="This shows overall health of Brandeis online services like LATTE or the wireless network. Click for more detail or to subscribe to service announcements and alerts." data-original-title="What's This?"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+<script>
+$(document).ready(function(){
+  // Allow user to submit with @brandeis.edu address
+    $('[name="f"]').submit(function(){
+        var mylogin = $('#username').val();
+      mylogin = mylogin.split('@')[0];
+          $('#username').val(mylogin);
+      });
+      });
+      </script>
+
+
+</body></html>
